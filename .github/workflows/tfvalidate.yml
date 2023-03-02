@@ -10,5 +10,4 @@ jobs:
 
       - name: terraform validate
         uses: dflook/terraform-validate@v1
-        with:
-          path: terraform
+
