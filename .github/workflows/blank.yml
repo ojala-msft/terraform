@@ -52,7 +52,8 @@ jobs:
          
     - name: 'Terraform Plan'
       if: steps.tfval.outputs.warning_count > 0
-        run: 'exit 1'
+        run: |
+              exit 1
       uses: hashicorp/terraform-github-actions@master
       with:
         tf_actions_version: 0.14.8
