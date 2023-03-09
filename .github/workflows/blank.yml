@@ -42,6 +42,7 @@ jobs:
         tf_actions_working_dir: "./tf"
  
     - name: 'Terraform Validate'
+      id: 'tfval'
       uses: hashicorp/terraform-github-actions@master
       with:
         tf_actions_version: 0.14.8
@@ -50,6 +51,7 @@ jobs:
         tf_actions_working_dir: "./tf"
          
     - name: 'Terraform Plan'
+      if: steps.tfval.outputs.warning_count > 0
       uses: hashicorp/terraform-github-actions@master
       with:
         tf_actions_version: 0.14.8
