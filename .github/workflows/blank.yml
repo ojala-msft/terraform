@@ -46,7 +46,7 @@ jobs:
       with:
         tf_actions_version: 0.14.8
         tf_actions_subcommand: 'validate'
-        args: 'json'
+        args: '-json'
         tf_actions_working_dir: "./tf"
          
     - name: 'Terraform Plan'
