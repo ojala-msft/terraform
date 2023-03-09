@@ -17,23 +17,40 @@ provider "azurerm" {
 data "azurerm_client_config" "current" {}
 
 #Create Resource Group
-resource "azurerm_resource_group" "tamops" {
-  name     = "tamops"
-  location = "eastus2"
+resource "azurerm_resource_group" "resource_group" {
+  name     = "app-service-rg"
+  location = "East US"
 }
 
-#Create Virtual Network
-resource "azurerm_virtual_network" "vnet" {
-  name                = "tamops-vnet"
-  address_space       = ["192.168.0.0/16"]
-  location            = "eastus2"
-  resource_group_name = azurerm_resource_group.tamops.name
+resource "azurerm_app_service_plan" "app_service_plan" {
+  name                = "myappservice-plan"
+  location            = azurerm_resource_group.resource_group.location
+  resource_group_name = azurerm_resource_group.resource_group.name
+
+  sku {
+    tier = "Standard"
+    size = "S1"
+  }
 }
 
-# Create Subnet
-resource "azurerm_subnet" "subnet" {
-  name                 = "subnet"
-  resource_group_name  = azurerm_resource_group.tamops.name
-  virtual_network_name = azurerm_virtual_network.vnet.name
-  address_prefix       = "192.168.0.0/24"
+resource "azurerm_app_service" "app_service" {
+  name                = "mywebapp22453627"
+  location            = azurerm_resource_group.resource_group.location
+  resource_group_name = azurerm_resource_group.resource_group.name
+  app_service_plan_id = azurerm_app_service_plan.app_service_plan.id
+
+  #(Optional)
+  site_config {
+dotnet_framework_version = "v4.0"
+    scm_type                 = "LocalGit"
+  }
+  
+  #(Optional)
+  app_settings = {
+    "SOME_KEY" = "some-value"
+  }
+
 }
+
+
+
