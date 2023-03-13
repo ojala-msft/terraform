@@ -57,7 +57,7 @@ jobs:
             
             <details><summary>Show Summery</summary>
             \`\`\`\n
-            ${process.env.validate.outcome}
+            ${process.env.validate}
             \`\`\`
 
             \`\`\`\n
