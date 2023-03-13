@@ -1,13 +1,13 @@
-terraform {    
-  required_providers {    
-    azurerm = {    
-      source = "hashicorp/azurerm"    
-    }    
-  }    
-} 
-   
-provider "azurerm" {    
-  features {}    
+terraform {
+  required_providers {
+    azurerm = {
+      source = "hashicorp/azurerm"
+    }
+  }
+}
+
+provider "azurerm" {
+  features {}
 }
 
 resource "azurerm_resource_group" "resource_group" {
@@ -34,10 +34,10 @@ resource "azurerm_app_service" "app_service" {
 
   #(Optional)
   site_config {
-dotnet_framework_version = "v4.0"
+    dotnet_framework_version = "v4.0"
     scm_type                 = "LocalGit"
   }
-  
+
   #(Optional)
   app_settings = {
     "SOME_KEY" = "some-value"
